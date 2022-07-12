@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+.bg-grey{
+    background-color: #c2c6cf;
+}
+.logo-img{
+    width: 150px;
+}

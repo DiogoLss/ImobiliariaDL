@@ -5,7 +5,6 @@
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public string Imagens { get; set; }
         public decimal Preco { get; set; }
         public int Quartos { get; set; }
         public int Banheiros { get; set; }

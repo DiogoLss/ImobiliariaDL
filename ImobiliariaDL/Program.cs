@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<ImobiliariaDLDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

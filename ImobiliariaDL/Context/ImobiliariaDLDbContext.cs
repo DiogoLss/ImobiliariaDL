@@ -8,8 +8,8 @@ namespace ImobiliariaDL.Context
         public ImobiliariaDLDbContext(DbContextOptions<ImobiliariaDLDbContext> options) : base(options)
         {
         }
-        public DbSet<Imovel> Imoveis;
-        public DbSet<Imagem> Imagens;
-        public DbSet<Endereco> Endereco;
+        public DbSet<Imovel>? Imoveis { get; set; }
+        public DbSet<Imagem>? Imagens { get; set; }
+        public DbSet<Endereco>? Endereco { get; set; }
     }
 }

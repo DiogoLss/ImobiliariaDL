@@ -4,6 +4,6 @@ namespace ImobiliariaDL.Repository
 {
     public interface IImagemRepository : IRepository<Imagem>
     {
-        public IEnumerable<Imagem> GetImagensImovel(int idImovel);
+        public IQueryable<Imagem> GetImagensImovel(int idImovel);
     }
 }

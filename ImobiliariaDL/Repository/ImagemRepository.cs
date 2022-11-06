@@ -8,9 +8,9 @@ namespace ImobiliariaDL.Repository
         public ImagemRepository(ImobiliariaDLDbContext context) : base(context)
         {
         }
-        public IEnumerable<Imagem> GetImagensImovel(int idImovel)
+        public IQueryable<Imagem> GetImagensImovel(int idImovel)
         {
-            var images = Get().Where(i => i.ImovelId == idImovel).ToList();
+            var images = Get().Where(i => i.ImovelId == idImovel);
             return images;
         }
         //public async Task<T> GetById(Expression<Func<T, bool>> predicate)

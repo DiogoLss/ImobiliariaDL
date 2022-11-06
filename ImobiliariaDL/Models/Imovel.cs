@@ -40,6 +40,6 @@ namespace ImobiliariaDL.Models
         [Required]
         [StringLength(16)]
         public string CEP { get; set; }
-        public List<Imagem> imagens { get; set; }
+        public List<Imagem> Imagens { get; set; }
     }
 }

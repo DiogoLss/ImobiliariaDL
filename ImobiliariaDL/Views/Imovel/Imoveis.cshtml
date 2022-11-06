@@ -1,0 +1,19 @@
+﻿@model ImoveisVM
+
+@foreach (var imovel in Model.Imoveis)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="CarroselImagens" for"@Model.Imagens" />
+                </div>
+                <div class="col-md-9">
+                    <h4>@imovel.ImagemThumb</h4>
+                    <h6>@imovel.Bairro</h6>
+                    <p>@imovel.Preco</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -8,8 +8,7 @@ namespace ImobiliariaDL.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         [Required]
-        [StringLength(300)]
-        public string Descricao { get; set; }
+        public string ImagemThumb { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         [Required]
         [Display(Name ="Valor")]
@@ -28,5 +27,19 @@ namespace ImobiliariaDL.Models
         [Required]
         public bool ECondominioOuApartamento { get; set; }
         public int? NumeroDoApCd { get; set; }
+
+        //ENDERECO
+        [Required]
+        public string Cidade { get; set; }
+        [Required(ErrorMessage = "Informe o bairro do imóvel")]
+        public string? Bairro { get; set; }
+        [Required(ErrorMessage = "Informe a rua do imóvel}")]
+        public string? Rua { get; set; }
+        [Required(ErrorMessage = "Informe o número do imóvel}")]
+        public int? Numero { get; set; }
+        [Required]
+        [StringLength(16)]
+        public string CEP { get; set; }
+        public List<Imagem> imagens { get; set; }
     }
 }

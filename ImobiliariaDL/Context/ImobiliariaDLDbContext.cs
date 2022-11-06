@@ -10,6 +10,5 @@ namespace ImobiliariaDL.Context
         }
         public DbSet<Imovel>? Imoveis { get; set; }
         public DbSet<Imagem>? Imagens { get; set; }
-        public DbSet<Endereco>? Endereco { get; set; }
     }
 }

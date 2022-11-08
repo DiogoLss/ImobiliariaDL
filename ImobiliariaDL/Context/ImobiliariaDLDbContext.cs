@@ -1,9 +1,10 @@
 ﻿using ImobiliariaDL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImobiliariaDL.Context
 {
-    public class ImobiliariaDLDbContext : DbContext
+    public class ImobiliariaDLDbContext : IdentityDbContext
     {
         public ImobiliariaDLDbContext(DbContextOptions<ImobiliariaDLDbContext> options) : base(options)
         {

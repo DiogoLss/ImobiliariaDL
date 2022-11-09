@@ -16,9 +16,28 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*NAVBAR*/
 .bg-grey{
     background-color: #c2c6cf;
 }
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
 .logo-img{
-    width: 150px;
+    width: 40%;
+}
+.nav-link{
+    color:#fff;
+}
+/*LOGIN*/
+.box_login{
+    width:50%;
+    margin: 15% 0 0 25%;
+    padding: 5%;
+    background-color: rgba(73,129,187,0.76);
+    border-radius: 10px;
+    text-align:center;
 }

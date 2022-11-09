@@ -12,19 +12,33 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 bg-grey">
+        <nav class="navbar navbar-light bg-grey fixed-top">
             <div class="container-fluid">
-                <a asp-controller="Home" asp-action="Index" ><img src="~/images/logo.png" class="logo-img" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>
-                            <a asp-controller="Imovel" asp-action="Imoveis" >imoveis</a>
+                <div class="nav-items">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                           <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" class="logo-img" /></a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Imovel" asp-action="Imoveis" class="nav-link">imoveis</a>
                         </li>
                     </ul>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a asp-controller="Account" asp-action="Index" class="nav-link">Administrador</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

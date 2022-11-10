@@ -31,7 +31,7 @@ namespace ImobiliariaDL.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, login.Password, false, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Admin", "Index");
+                    return RedirectToAction("Home","Index");
                 }
             }
             ModelState.AddModelError("", "Falha ao realizar login");

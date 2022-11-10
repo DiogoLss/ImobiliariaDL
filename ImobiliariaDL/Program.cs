@@ -1,5 +1,6 @@
 using ImobiliariaDL.Context;
 using ImobiliariaDL.Repository;
+using ImobiliariaDL.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ISeed, Seed>();
 
 var app = builder.Build();
 
@@ -28,12 +30,31 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+Criar(app);
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void Criar(WebApplication app)
+{
+    var scoped = app.Services.GetService<IServiceScopeFactory>();
+    using( var scope = scoped.CreateScope())
+    {
+        var services = scope.ServiceProvider.GetService<ISeed>();
+        services.SeedUser();
+    }
+}

@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
 
 builder.Services.AddDbContext<ImobiliariaDLDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

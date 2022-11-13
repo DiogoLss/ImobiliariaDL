@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ImobiliariaDL.Repository;
+using ImobiliariaDL.ViewModels;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImobiliariaDL.Models
@@ -8,7 +10,7 @@ namespace ImobiliariaDL.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         [Required]
-        public string ImagemThumb { get; set; }
+        public byte[] ImagemThumb { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         [Required]
         [Display(Name ="Valor")]
@@ -41,5 +43,21 @@ namespace ImobiliariaDL.Models
         [StringLength(16)]
         public string CEP { get; set; }
         public List<Imagem> Imagens { get; set; }
+
+
+        //public ImoveisVM Imoveis(IUnitOfWork _uf)
+        //{
+        //    var imovelVM = new ImoveisVM();
+        //    var imoveis = _uf.Imoveis.Get().ToList();
+
+        //    for (int i = 0; i < imoveis.Count; i++)
+        //    {
+        //        List<Imagem> imagensList = new List<Imagem>();
+        //        imagensList = _uf.Imagens.GetImagensImovel(imoveis[i].Id).ToList();
+        //        imoveis[i].Imagens = imagensList;
+        //    }
+        //    imovelVM.Imoveis = imoveis;
+        //    return imovelVM;
+        //} POSSIVEL MUDANÇA
     }
 }

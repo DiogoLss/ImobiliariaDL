@@ -8,5 +8,10 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public void SalvarImovel()
+        {
+            
+        }
     }
 }

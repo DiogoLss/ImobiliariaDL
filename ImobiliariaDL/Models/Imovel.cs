@@ -26,20 +26,20 @@ namespace ImobiliariaDL.Models
         public int Salas { get; set; }
         [Range(0, 100, ErrorMessage = "A quantidade de {0} deve ser entre {1} e {2}")]
         public int Garagens { get; set; }
-        [Required]
-        public bool ECondominioOuApartamento { get; set; }
+        public bool ECondominio { get; set; }
+        public bool EApartamento { get; set; }
         public int? NumeroDoApCd { get; set; }
 
         //ENDERECO
-        [Required]
+        [Required(ErrorMessage = "Informe a cidade do imóvel")]
         public string Cidade { get; set; }
         [Required(ErrorMessage = "Informe o bairro do imóvel")]
-        public string? Bairro { get; set; }
-        [Required(ErrorMessage = "Informe a rua do imóvel}")]
-        public string? Rua { get; set; }
-        [Required(ErrorMessage = "Informe o número do imóvel}")]
+        public string Bairro { get; set; }
+        [Required(ErrorMessage = "Informe a rua do imóvel")]
+        public string Rua { get; set; }
+        [Required(ErrorMessage = "Informe o número do imóvel")]
         public int? Numero { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Informe o CEP do imóvel")]
         [StringLength(16)]
         public string CEP { get; set; }
         public List<Imagem> Imagens { get; set; }

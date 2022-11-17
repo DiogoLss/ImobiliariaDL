@@ -27,9 +27,11 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult NovoImovel(AddImovelVM imovel, IFormFile file)
+        public IActionResult NovoImovel(AddImovelVM imovel, List<IFormFile> files)
         {
             //imovel.Imovel = JsonConvert.DeserializeObject<Imovel>(imovel.ImovelDescription);
+            var random = new Random();
+            int id = random.Next(1, 1000000);
             if (imovel.EApartamento && imovel.ECondominio)
             {
                 //ViewData["Erro"] = "Escolha entre apartamento ou condominio";
@@ -37,6 +39,7 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
             }
             Imovel imovelAdd = new Imovel()
             {
+                Id = id,
                 Nome = imovel.Nome,
                 Preco = imovel.Preco,
                 Quartos = imovel.Quartos,
@@ -52,19 +55,40 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
                 Numero = imovel.Numero,
                 CEP = imovel.CEP
             };
-            if (file != null)
+            if (files != null)
             {
-                using (var ms = new MemoryStream())
+                for (int i = 0; i < files.Count; i++)
                 {
-                    file.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    imovelAdd.ImagemThumb = fileBytes;
+                    if (i == 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            files[i].CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            imovelAdd.ImagemThumb = fileBytes;
 
-                    _uf.Imoveis.Adicionar(imovelAdd);
-                    _uf.Commit();
-
-                    return View(imovel);
+                            _uf.Imoveis.Adicionar(imovelAdd);
+                            _uf.Commit();
+                        }
+                    }
+                    else
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            files[i].CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            var imagem = new Imagem()
+                            {
+                                ImovelId = id,
+                                ImagemString = fileBytes,
+                            };
+                            _uf.Imagens.Adicionar(imagem);
+                            _uf.Commit();
+                        }
+                    }
                 }
+                return View();
+                //return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -72,18 +96,22 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
                 return View();
             }
         }
-        
+
         [HttpPost]
         public void SalvarImagensImovel(List<IFormFile> files, int idImovel)
         {
             List<Imagem> imagens = new List<Imagem>();
             foreach (IFormFile file in files)
             {
-                using(var ms = new MemoryStream())
+                using (var ms = new MemoryStream())
                 {
                     file.CopyTo(ms);
                     var fileBytes = ms.ToArray();
-                    Imagem imagem = new Imagem(fileBytes, idImovel);
+                    Imagem imagem = new Imagem()
+                    {
+                        ImovelId=idImovel,
+                        ImagemString=fileBytes
+                    };
                     imagens.Add(imagem);
                 }
             }

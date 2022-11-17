@@ -10,7 +10,7 @@ namespace ImobiliariaDL.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         [Required]
-        public byte[] ImagemThumb { get; set; }
+        public byte[]? ImagemThumb { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         [Required]
         [Display(Name ="Valor")]
@@ -42,8 +42,7 @@ namespace ImobiliariaDL.Models
         [Required(ErrorMessage ="Informe o CEP do imóvel")]
         [StringLength(16)]
         public string CEP { get; set; }
-        public List<Imagem> Imagens { get; set; }
-
+        public List<Imagem>? Imagens { get; set; }
 
         //public ImoveisVM Imoveis(IUnitOfWork _uf)
         //{

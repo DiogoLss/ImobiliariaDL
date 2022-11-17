@@ -27,27 +27,43 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult NovoImovel(AddImovelVM imovel)
+        public IActionResult NovoImovel(AddImovelVM imovel, IFormFile file)
         {
             //imovel.Imovel = JsonConvert.DeserializeObject<Imovel>(imovel.ImovelDescription);
-
-            if (imovel.Imovel.EApartamento && imovel.Imovel.ECondominio)
+            if (imovel.EApartamento && imovel.ECondominio)
             {
-                ViewData["Erro"] = "Escolha entre apartamento ou condominio";
-                return View(ViewData);
+                //ViewData["Erro"] = "Escolha entre apartamento ou condominio";
+                return View();
             }
-
-            if (imovel.File != null)
+            Imovel imovelAdd = new Imovel()
+            {
+                Nome = imovel.Nome,
+                Preco = imovel.Preco,
+                Quartos = imovel.Quartos,
+                Banheiros = imovel.Banheiros,
+                Salas = imovel.Salas,
+                Garagens = imovel.Garagens,
+                ECondominio = imovel.ECondominio,
+                EApartamento = imovel.EApartamento,
+                NumeroDoApCd = imovel.NumeroDoApCd,
+                Cidade = imovel.Cidade,
+                Bairro = imovel.Bairro,
+                Rua = imovel.Rua,
+                Numero = imovel.Numero,
+                CEP = imovel.CEP
+            };
+            if (file != null)
             {
                 using (var ms = new MemoryStream())
                 {
-                    imovel.File.CopyTo(ms);
+                    file.CopyTo(ms);
                     var fileBytes = ms.ToArray();
-                    imovel.Imovel.ImagemThumb = fileBytes;
+                    imovelAdd.ImagemThumb = fileBytes;
 
+                    _uf.Imoveis.Adicionar(imovelAdd);
                     _uf.Commit();
 
-                    return View(imovel.Imovel);
+                    return View(imovel);
                 }
             }
             else

@@ -29,7 +29,6 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult NovoImovel(AddImovelVM imovel, List<IFormFile> files)
         {
-            //imovel.Imovel = JsonConvert.DeserializeObject<Imovel>(imovel.ImovelDescription);
             var random = new Random();
             int id = random.Next(1, 1000000);
             if (imovel.EApartamento && imovel.ECondominio)
@@ -68,7 +67,6 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
                             imovelAdd.ImagemThumb = fileBytes;
 
                             _uf.Imoveis.Adicionar(imovelAdd);
-                            _uf.Commit();
                         }
                     }
                     else
@@ -79,14 +77,15 @@ namespace ImobiliariaDL.Areas.Admin.Controllers
                             var fileBytes = ms.ToArray();
                             var imagem = new Imagem()
                             {
+                                Id = null,
                                 ImovelId = id,
                                 ImagemString = fileBytes,
                             };
                             _uf.Imagens.Adicionar(imagem);
-                            _uf.Commit();
                         }
                     }
                 }
+                _uf.Commit();
                 return View();
                 //return RedirectToAction("Index", "Home");
             }
